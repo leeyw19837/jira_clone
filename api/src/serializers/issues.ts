@@ -1,6 +1,6 @@
 import { pick } from 'lodash';
 
-import { Issue } from 'entities';
+import { Issue } from '../entity';
 
 export const issuePartial = (issue: Issue): Partial<Issue> =>
   pick(issue, [

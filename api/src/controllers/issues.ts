@@ -1,6 +1,6 @@
-import { Issue } from 'entities';
-import { catchErrors } from 'errors';
-import { updateEntity, deleteEntity, createEntity, findEntityOrThrow } from 'utils/typeorm';
+import { Issue } from '../entity';
+import { catchErrors } from '../errors';
+import { updateEntity, deleteEntity, createEntity, findEntityOrThrow } from '../utils/typeorm';
 
 export const getProjectIssues = catchErrors(async (req, res) => {
   const { projectId } = req.currentUser;

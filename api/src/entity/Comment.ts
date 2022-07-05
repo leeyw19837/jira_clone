@@ -8,10 +8,10 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import is from 'utils/validation';
 import { Issue, User } from '.';
+import is from "../utils/validation";
 
-@Entity()
+@Entity("comment")
 class Comment extends BaseEntity {
   static validations = {
     body: [is.required(), is.maxLength(50000)],

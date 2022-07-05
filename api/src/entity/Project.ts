@@ -8,11 +8,11 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import is from 'utils/validation';
-import { ProjectCategory } from 'constants/projects';
+import is from '../utils/validation';
+import { ProjectCategory } from '../constants/projects';
 import { Issue, User } from '.';
 
-@Entity()
+@Entity("project")
 class Project extends BaseEntity {
   static validations = {
     name: [is.required(), is.maxLength(100)],

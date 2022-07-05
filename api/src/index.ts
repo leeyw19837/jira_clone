@@ -1,27 +1,25 @@
-import 'module-alias/register';
-import 'dotenv/config';
-import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
+import {createConnection} from "typeorm";
+import {addRespondToResponse} from "./middleware/response";
+import {authenticateUser} from "./middleware/authentication";
+import {attachPrivateRoutes, attachPublicRoutes} from "./routes";
+import {handleError} from "./middleware/errors";
+import {RouteNotFoundError} from "./errors";
 
-import createDatabaseConnection from 'database/createConnection';
-import { addRespondToResponse } from 'middleware/response';
-import { authenticateUser } from 'middleware/authentication';
-import { handleError } from 'middleware/errors';
-import { RouteNotFoundError } from 'errors';
+const port = 9988
 
-import { attachPublicRoutes, attachPrivateRoutes } from './routes';
-
-const establishDatabaseConnection = async (): Promise<void> => {
-  try {
-    await createDatabaseConnection();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const initializeExpress = (): void => {
-  const app = express();
+createConnection({
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "piggyleeyw900129",
+  "database": "jira_development",
+  "entities": [__dirname + "/entity/*.ts"],
+  "synchronize": true
+}).then(_=>{
+  const app = express()
 
   app.use(cors());
   app.use(express.json());
@@ -38,12 +36,10 @@ const initializeExpress = (): void => {
   app.use((req, _res, next) => next(new RouteNotFoundError(req.originalUrl)));
   app.use(handleError);
 
-  app.listen(process.env.PORT || 3000);
-};
-
-const initializeApp = async (): Promise<void> => {
-  await establishDatabaseConnection();
-  initializeExpress();
-};
-
-initializeApp();
+  app.listen(process.env.PORT || port, ()=>{
+    console.log(`express app run on port: ${port}`)
+  });
+  console.log("Express application is up and running on port 3000")
+}).catch(error=>{
+  console.error('TypeORM connection error: ', error)
+})

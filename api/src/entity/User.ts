@@ -11,10 +11,10 @@ import {
   RelationId,
 } from 'typeorm';
 
-import is from 'utils/validation';
+import is from '../utils/validation';
 import { Comment, Issue, Project } from '.';
 
-@Entity()
+@Entity("users")
 class User extends BaseEntity {
   static validations = {
     name: [is.required(), is.maxLength(100)],

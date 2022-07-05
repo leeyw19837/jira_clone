@@ -4,7 +4,7 @@
   "author": "Ivor Reic",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server",
     "start:production": "pm2 start --name 'jira_client' server.js",
     "test:jest": "jest",
     "test:cypress": "node_modules/.bin/cypress open",
@@ -23,7 +23,6 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.3.2",
-    "cypress": "^3.8.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.7.0",

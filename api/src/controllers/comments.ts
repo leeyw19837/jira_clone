@@ -1,9 +1,10 @@
-import { Comment } from 'entities';
-import { catchErrors } from 'errors';
-import { updateEntity, deleteEntity, createEntity } from 'utils/typeorm';
+import { Comment } from '../entity';
+import { catchErrors } from '../errors';
+import { updateEntity, deleteEntity, createEntity } from '../utils/typeorm';
 
 export const create = catchErrors(async (req, res) => {
   const comment = await createEntity(Comment, req.body);
+  console.log('~~~create entered', comment);
   res.respond({ comment });
 });
 

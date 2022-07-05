@@ -15,11 +15,11 @@ import {
   BeforeInsert,
 } from 'typeorm';
 
-import is from 'utils/validation';
-import { IssueType, IssueStatus, IssuePriority } from 'constants/issues';
+import is from '../utils/validation';
+import { IssueType, IssueStatus, IssuePriority } from '../constants/issues';
 import { Comment, Project, User } from '.';
 
-@Entity()
+@Entity("issue")
 class Issue extends BaseEntity {
   static validations = {
     title: [is.required(), is.maxLength(200)],
