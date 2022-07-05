@@ -39,7 +39,6 @@ createConnection({
   app.listen(process.env.PORT || port, ()=>{
     console.log(`express app run on port: ${port}`)
   });
-  console.log("Express application is up and running on port 3000")
 }).catch(error=>{
   console.error('TypeORM connection error: ', error)
 })
